@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34814.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTMLTester", "HTMLTester.csproj", "{8B9EE41D-2692-4763-A3E0-364467E8C894}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SyncXMLWriter", "..\SyncXMLWriter\SyncXMLWriter.csproj", "{C3C507BA-DF43-47CB-B699-CF8D92762852}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B9EE41D-2692-4763-A3E0-364467E8C894}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B9EE41D-2692-4763-A3E0-364467E8C894}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B9EE41D-2692-4763-A3E0-364467E8C894}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B9EE41D-2692-4763-A3E0-364467E8C894}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3C507BA-DF43-47CB-B699-CF8D92762852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3C507BA-DF43-47CB-B699-CF8D92762852}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3C507BA-DF43-47CB-B699-CF8D92762852}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3C507BA-DF43-47CB-B699-CF8D92762852}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CAB8D3DB-10DC-485D-9DA5-DFA0492888AD}
+	EndGlobalSection
+EndGlobal
