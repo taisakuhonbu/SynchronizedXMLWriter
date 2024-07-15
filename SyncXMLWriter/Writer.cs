@@ -657,15 +657,12 @@ namespace SyncXW
     {
         private XContext ctx_;
         private Node node;
-        private Func<int, bool>? valid_;
-        private Action<Dictionary<String, String>>? add_attributes_;
-        private Dictionary<String, String>? attributes_;
+
         /// <summary>
         /// 属性を持たない要素を作る
         /// </summary>
-        /// <param name="indent"></param>
-        /// <param name="element_name"></param>
-        /// <param name="is_empty"></param>
+        /// <param name="ctx"></param>
+        /// <param name="n"></param>
         public ElementWriter(XContext ctx, Node n)
         {
             ctx_ = ctx;
@@ -675,9 +672,8 @@ namespace SyncXW
         /// <summary>
         /// あったりなかったりする属性を持たない要素を作る
         /// </summary>
-        /// <param name="indent"></param>
-        /// <param name="element_name"></param>
-        /// <param name="is_empty"></param>
+        /// <param name="ctx"></param>
+        /// <param name="n"></param>
         /// <param name="valid"></param>
         public ElementWriter(XContext ctx, Node n, Func<bool>valid) : this(ctx, n, valid, null)
         {
@@ -685,9 +681,8 @@ namespace SyncXW
         /// <summary>
         /// 属性を持つ要素を作る
         /// </summary>
-        /// <param name="indent"></param>
-        /// <param name="element_name"></param>
-        /// <param name="is_empty"></param>
+        /// <param name="ctx"></param>
+        /// <param name="n"></param>
         /// <param name="add_attributes"></param>
         public ElementWriter(XContext ctx, Node n, Action<Dictionary<String, String>> add_attributes)
         {
@@ -698,32 +693,15 @@ namespace SyncXW
         /// <summary>
         /// あったりなかったりする要素を作る
         /// </summary>
-        /// <param name="indent"></param>
-        /// <param name="element"></param>
+        /// <param name="ctx"></param>
+        /// <param name="n"></param>
         /// <param name="valid"></param>
-        /// <param name="has_children"></param>
         /// <param name="add_attributes"></param>
         public ElementWriter(XContext ctx, Node n, Func<bool> valid, Action<Dictionary<String, String>>? add_attributes)
         {
             ctx_ = ctx;
             node = n;
             ctx.WriteOpen(n, valid, add_attributes);
-        }
-        /// <summary>
-        /// Seq<ElementWriter> から呼ばれる
-        /// </summary>
-        /// <param name="indent"></param>
-        /// <param name="element_name"></param>
-        /// <param name="is_empty"></param>
-        /// <param name="index"></param>
-        /// <param name="add_attributes"></param>
-        internal ElementWriter(XContext ctx, Node n, int index, Action<int, Dictionary<String, String>>? add_attributes)
-        {
-            ctx_ = ctx;
-            node = n;
-            attributes_ = new Dictionary<String, String>();
-            add_attributes?.Invoke(index, attributes_);
-            ctx_.WriteOpen(n, attributes_);
         }
         public void Dispose()
         {
@@ -733,8 +711,13 @@ namespace SyncXW
 
     public class TextNodeWriter : IDisposable
     {
-        XContext ctx_;
-        Node node_;
+        private XContext ctx_;
+        private Node node_;
+        /// <summary>
+        /// テキストを作ります
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <param name="text"></param>
         public TextNodeWriter(XContext ctx, String text)
         {
             ctx_ = ctx;
@@ -767,9 +750,9 @@ namespace SyncXW
 
     public class Seq : IDisposable
     {
-        XContext ctx_;
-        XContext.Kid kid_;
-        Node node_;
+        private XContext ctx_;
+        private XContext.Kid kid_;
+        private Node node_;
         private Func<Counter, bool> valid_;
         private Action<Counter, Dictionary<String, String>>? add_attributes_;
         private Func<Counter, String>? insert_text_;
