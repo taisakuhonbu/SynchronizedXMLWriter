@@ -20,7 +20,7 @@ using (HTML html = new(ctx))
 {
     using (HEAD head = new(ctx))
     {
-        using (TITLE title = new(ctx)) { using (new SyncXW.TextNodeWriter(ctx, "Test HTML")) { } }
+        using (TITLE title = new(ctx, "Test HTML")) { }
         using (SCRIPT script0 = new(ctx, "index.js")) { }
         using (STYLESHEET link0 = new(ctx, "index.css")) { }
     }
@@ -28,20 +28,20 @@ using (HTML html = new(ctx))
     {
         using (DIV d0 = new(ctx))
         {
-            SyncXW.Counter counter = new();
+            SyncXW.Counter counter0 = new();
             using (TABLE table = new(ctx))
             {
-                using (TRs rows = new(ctx, counter, index => { return index.Get() < 4; }, (counter, attr) => { if (counter.Get() % 2 == 0) { attr["class"] = "even-row"; } else { attr["class"] = "odd-row"; } }))
+                using (TRs rows = new(ctx, counter0, index => { return index.Get() < 4; }, (counter, attr) => { if (counter.Get() % 2 == 0) { attr["class"] = "even-row"; } else { attr["class"] = "odd-row"; } }))
                 {
                     using (TH th = new(ctx))
                     {
-                        using (new SyncXW.TextNodeWriter(ctx, () => { return "Table Head " + counter.Get().ToString(); }))
+                        using (new SyncXW.TextNodeWriter(ctx, () => { return "Table Head " + counter0.Get().ToString(); }))
                         {
                         }
                     }
                     using (TD td = new(ctx))
                     {
-                        using (new SyncXW.TextNodeWriter(ctx, () => { return "Table Data " + counter.Get().ToString(); }))
+                        using (new SyncXW.TextNodeWriter(ctx, () => { return "Table Data " + counter0.Get().ToString(); }))
                         {
                         }
                     }
@@ -60,7 +60,7 @@ using (HTML html = new(ctx))
                 {
                     using (SELECT select = new(ctx, () => { return names[index1.Get()]; }))
                     {
-                        using (OPTIONs option = new(ctx, index2, (index) => { return options[index1.Get()][index.Get()]; }, (index, attr) => { if (index.Get() == 1) { attr["selected"] = "selected"; } }))
+                        using (OPTIONs option = new(ctx, index2, (counter) => { return options[index1.Get()][counter.Get()]; }, (counter, attr) => { if (counter.Get() == 1) { attr["selected"] = "selected"; } }))
                         {
                             using (new SyncXW.TextNodeWriter(ctx, () => { return $"Option {index1.ToString()}, {index2.ToString()}"; }))
                             {

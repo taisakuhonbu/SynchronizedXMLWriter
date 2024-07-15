@@ -79,18 +79,23 @@ namespace SyncHTML
     }
     public class TITLE : SyncXW.ElementWriter
     {
-        public TITLE(SyncXW.XContext ctx) : base(ctx, SyncXW.Node.CreateOneLineElement("title"))
-        { }
+        public TITLE(SyncXW.XContext ctx, String title) : base(ctx, SyncXW.Node.CreateOneLineElement("title"))
+        {
+             using (SyncXW.TextNodeWriter t = new(ctx, title))
+            {
+            }
+        }
     }
     public class SCRIPT : SyncXW.ElementWriter
     {
-        public SCRIPT(SyncXW.XContext ctx, String src) : base(ctx, SyncXW.Node.CreateOneLineElement("script"), (attr) => { attr["type"] = "text/javascript"; attr["src"] = src; })
+        public SCRIPT(SyncXW.XContext ctx, String src)
+            : base(ctx, SyncXW.Node.CreateOneLineElement("script"), (attr) => { attr["type"] = "text/javascript"; attr["src"] = src; })
         { }
     }
     public class STYLESHEET : SyncXW.ElementWriter
     {
         public STYLESHEET(SyncXW.XContext ctx, String href)
-        : base(ctx, SyncXW.Node.CreateEmptyElement("link"), attr => { attr["rel"] = "stylesheet"; attr["type"] = "text/css"; attr["href"] = href; })
+            : base(ctx, SyncXW.Node.CreateEmptyElement("link"), attr => { attr["rel"] = "stylesheet"; attr["type"] = "text/css"; attr["href"] = href; })
         { }
     }
     public class BODY : SyncXW.ElementWriter
@@ -142,7 +147,7 @@ namespace SyncHTML
     public class TRs : SyncXW.Seq
     {
         public TRs(SyncXW.XContext ctx, SyncXW.Counter counter, Func<Counter, bool> valid, Action<Counter, Dictionary<String, String>> add_attribute)
-                : base(ctx, counter, SyncXW.Node.CreateElement("tr"), valid, add_attribute)
+            : base(ctx, counter, SyncXW.Node.CreateElement("tr"), valid, add_attribute)
         { }
     }
     public class TH : SyncXW.ElementWriter
@@ -163,7 +168,7 @@ namespace SyncHTML
     }
     public class FORM : SyncXW.ElementWriter
     {
-        public FORM(SyncXW.XContext ctx, String action, string method)
+        public FORM(SyncXW.XContext ctx, String action, String method)
             : base(ctx, SyncXW.Node.CreateElement("form"), attr => { attr["action"] = action; attr["method"] = method; })
         { }
     }
