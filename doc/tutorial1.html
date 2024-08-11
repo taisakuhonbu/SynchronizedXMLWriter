@@ -1,0 +1,109 @@
+<html>
+	<head>
+		<title>チュートリアル１</title>
+		<style type="text/css"><!--
+			img
+			{
+				border-style: solid;
+				border-width: 2px;
+				border-color: #1c8cfc;
+			}
+			span.code
+			{
+				font-family: monospace;
+			}
+			body
+			{
+				padding: 12px;
+			}
+		--></style>
+	</head>
+	<body>
+		<p>
+			HTML を書き出すチュートリアルです。
+		</p>
+		<h1>0.コンテキストを作ります</h1>
+		<p>
+			<img src="tu0Context.png"/>
+		</p>
+		<h1>1. 固定の簡素な要素を作ります</h1>
+		 <p>
+			<code>ElementWriter</code> クラスのインスタンスを作るのですが、見た目をよくするためにクラスを作りましょう。
+		 </p>
+		 <div>
+			<h2>属性がなくて、必ず発生する要素</h2>
+			<p>
+				必ず発生するということで、ルート要素を作ります。クラス名は <code>HTML</code> です。
+			</p>
+			<p>
+				<img src="tu1HTML.png"/>
+			</p>
+			<p>
+				ノード指定は普通の要素になる <code>CreateElement</code> を使います。<code>HEAD</code> とか <code>BODY</code> とかも作っておきましょう。
+			</p>
+			<p>
+				<code>ElementWriter</code>クラスは、コンストラクターで開くタグを、ディスポーザーで閉じるタグを書くので、<code>using</code> でインスタンスを作ります。作られた変数は使われないので、変数名よりクラス名に気を使いましょう。
+			</p>
+			<p>
+				<img src="tu1_1.png"/>
+			</p>
+			<h2>固定の、テキストだけを持つ要素を作ります。</h2>
+			<p>
+				title 要素です。改行・インデントを入れない、<code>CreateOneLineElement </code>で要素を作ります。
+			</p>
+			 <p>
+				<img src="tu1TITLE.png"/>
+			 </p>
+			<p>
+				テキストは閉じる必要がないので、コンストラクターの中で単純に作れますが、条件があるときは <code>using</code> が必要なので、常に使うようにしましょう。<code>TextNodeWriter</code> のコンストラクター引数で内容テキストを渡します。
+			</p>
+			<h2>固定の、属性だけを持つ要素を作ります。</h2>
+			<p>
+				スタイルシートを指定する link 要素は空要素なので、<code>CreateEmptyElement</code> で要素を作ります。<code>Dictionary&lt;String, String&gt;</code> を受け取るラムダ式の中で、属性をセットします。
+			</p>
+			<p>
+				<img src="tu1STYLESHEET.png"/>
+			</p>
+			<p>
+				script も同様に作って（<code>CreateOneLineElement</code> を使います）、head の中に入れましょう。
+			</p>
+			<p>
+				<img src="tu1_2.png"/>
+			</p>
+		</div>
+		<h1>2.条件付き書き出し</h1>
+		<p>
+			<code>bool</code> を返すラムダ式を渡すと、書き出すタイミングで呼び出され、最終判断ができます。
+		</p>
+		<div>
+			<h2>単純な条件</h2>
+			<p>
+				日曜日にだけ追加のパラグラフを書き出しましょう。<code>p</code> のクラスにラムダ式を受け取るコンストラクターを作ります。
+			</p>
+			<p>
+				<img src="tu2P.png"/>
+			</p>
+			<p>
+				日曜日かを返しましょう。日曜日でない場合は、<code>using</code> の中にある <code>TextNodeWriter</code> もコンテントを書き出しません。
+			</p>
+			<p>
+				<img src="tu2_1.png"/>
+			</p>
+			<h2>繰り返し</h2>
+			<p>
+				表の行を縞模様で作ります。コンストラクターでカウンターを受け取ります。書き出すタイミングで呼び出される、カウンターを受け取って <code>bool</code> を返すラムダ式も必要です。スタイル変更は、カウンターと属性の辞書を受け取るラムダ式を使います。
+			</p>
+			<p>
+				<img src="tu2TRs.png"/>
+			</p>
+			<p>
+				４行まで作ります。<code>index</code> はコンストラクターで渡した <code>counter0</code> です。書き出すたびに <code>Get</code> が返す値が１つずつ増えます。このカウンターを参照して、終了判定をします。<br/>
+				縞模様にするため、奇数と偶数でスタイル用のクラスを切り替えます。<br/>
+				セル要素の内容は最初に渡したカウンター <code>counter0</code> を使って作ります。行要素でもラムダ式の引数 <code>index</code> を無視して <code>counter0</code> を使うこともできます。
+			</p>
+			<p>
+				<img src="tu2_2.png"/>
+			</p>
+		</div>
+	</body>
+</html>

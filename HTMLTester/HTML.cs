@@ -81,7 +81,7 @@ namespace SyncHTML
     {
         public TITLE(SyncXW.XContext ctx, String title) : base(ctx, SyncXW.Node.CreateOneLineElement("title"))
         {
-             using (SyncXW.TextNodeWriter t = new(ctx, title))
+            using (SyncXW.TextNodeWriter t = new(ctx, title))
             {
             }
         }
@@ -114,6 +114,9 @@ namespace SyncHTML
     public class P : SyncXW.ElementWriter
     {
         public P(SyncXW.XContext ctx) : base(ctx, SyncXW.Node.CreateElement("p"))
+        { }
+        public P(SyncXW.XContext ctx, Func<bool> valid)
+         : base(ctx, SyncXW.Node.CreateElement("p"), valid)
         { }
         public P(SyncXW.XContext ctx, BasicAttribute id_and_class)
             : base(ctx, SyncXW.Node.CreateElement("p"), attr => { id_and_class.WriteTo(attr); })

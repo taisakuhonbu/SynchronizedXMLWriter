@@ -28,10 +28,16 @@ using (HTML html = new(ctx))
     {
         using (DIV d0 = new(ctx))
         {
+            using (P p = new P(ctx, () => { return DateTime.Now.DayOfWeek == DayOfWeek.Sunday;  }))
+            {
+                using (new SyncXW.TextNodeWriter(ctx, "Happy day"))
+                {
+                }
+            }
             SyncXW.Counter counter0 = new();
             using (TABLE table = new(ctx))
             {
-                using (TRs rows = new(ctx, counter0, index => { return index.Get() < 4; }, (counter, attr) => { if (counter.Get() % 2 == 0) { attr["class"] = "even-row"; } else { attr["class"] = "odd-row"; } }))
+                using (TRs rows = new(ctx, counter0, index => { return index.Get() < 4; }, (index, attr) => { if (index.Get() % 2 == 0) { attr["class"] = "even-row"; } else { attr["class"] = "odd-row"; } }))
                 {
                     using (TH th = new(ctx))
                     {
